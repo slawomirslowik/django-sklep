@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wybierz metodę płatności</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .order-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .amount {
+            font-size: 28px;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Płatność za zamówienie</h1>
+    
+    <div class="order-info">
+        <h2>Zamówienie #{{ order.pk }}</h2>
+        <p><strong>Produkt:</strong> {{ order.product.name }}</p>
+        <div class="amount">{{ order.total_amount }} {{ order.currency }}</div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="id_backend">Wybierz metodę płatności:</label>
+        {{ form.backend }}
+        
+        {% if form.errors %}
+        <div style="color: red; margin-top: 10px;">
+            {{ form.errors }}
+        </div>
+        {% endif %}
+        
+        <button type="submit">Przejdź do płatności</button>
+    </form>
+</body>
+</html>

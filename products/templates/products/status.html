@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status płatności</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .message-box {
+            padding: 40px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        .failure {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box {{ type }}">
+        <h1>
+            {% if type == 'success' %}
+                ✓ Sukces!
+            {% else %}
+                ✗ Błąd
+            {% endif %}
+        </h1>
+        <p>{{ message }}</p>
+    </div>
+    
+    <a href="{% url 'payment:product_list' %}" class="btn">Powrót do listy produktów</a>
+</body>
+</html>
